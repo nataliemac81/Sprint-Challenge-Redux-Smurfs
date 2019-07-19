@@ -13,3 +13,19 @@
    U - updateSmurf
    D - deleteSmurf
 */
+export const ADD_SMURF = 'ADD_SMURF';
+export const GET_SMURF = 'GET_SMURF';
+
+export function addSmurf(newSmurf) {
+  return {
+    type: ADD_SMURF,
+    payload: newSmurf
+  }
+}
+
+export function getSmurf(id) {
+  return {
+    type: GET_SMURF,
+    payload: id
+  }
+}
