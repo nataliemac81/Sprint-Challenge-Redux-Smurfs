@@ -14,7 +14,7 @@
    D - deleteSmurf
 */
 export const ADD_SMURF = 'ADD_SMURF';
-export const GET_SMURF = 'GET_SMURF';
+export const GET_SMURFS = 'GET_SMURFS';
 
 export function addSmurf(newSmurf) {
   return {
@@ -23,9 +23,9 @@ export function addSmurf(newSmurf) {
   }
 }
 
-export function getSmurf(id) {
+export function getSmurfs(id) {
   return {
-    type: GET_SMURF,
+    type: GET_SMURFS,
     payload: id
   }
 }
