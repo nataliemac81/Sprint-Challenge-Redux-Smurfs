@@ -14,7 +14,10 @@ import {
  const initialState = {
    smurfs: [],
    fetchingSmurfs: false,
-   error: null
+   error: null,
+   name: '',
+   age: '',
+   height: ''
  }
 
 export default (state = initialState, action) => {
@@ -49,7 +52,6 @@ export default (state = initialState, action) => {
       case ADD_SMURF:
         return {
           ...state,
-          id: action.payload.id,
           name: action.payload.name,
           age: action.payload.age,
           height: action.payload.height
