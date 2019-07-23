@@ -8,10 +8,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 
-const store = createStore(
-  rootReducer, // this is the most basic reducer. A function that returns and object. Replace it.
-  applyMiddleware(logger, thunk)
-);
+const store = createStore(rootReducer, applyMiddleware(logger, thunk));
 
 ReactDOM.render(
   <Provider store={store}>

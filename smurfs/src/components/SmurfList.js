@@ -1,54 +1,50 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { getSmurfs } from '../actions'
+import { fetchSmurfs, fetchSmurfsBegin, fetchSmurfsSuccess, fetchSmurfsFailure } from '../actions'
 
 class SmurfList extends React.Component {
-	state = {
-		smurfs: []
+	
+	componentDidMount() {
+		this.props.dispatch(fetchSmurfs())
 	}
 
-	fetchSmurfs = e => {
-		e.preventDefault()
-		this.props.getSmurfs()
-	}
+	render() {
+		const { err, fetchingSmurfs, smurfs } = this.props
+		console.log(smurfs)
 
-	render () {
+		if (err) {
+			return <div>Error! {err.message}</div>
+		}
+		if (fetchingSmurfs) {
+			return <div>Fetching...</div>
+		}
+
 		return (
-			<div>
-				{this.props.smurfs.map((smurf, index) => (
-					<h1 key={index}>
-						{smurf.name}
-						{smurf.age}
-						{smurf.height}
-					</h1>
+			<ul>
+				{smurfs.map((smurf, index) => {					
+						return (
+							<div key={index}>
+								<li>Name: {smurf.name}  Age: {smurf.age} Height: {smurf.height}</li>
+							</div>
 
-				))}
-				{this.props.error && <p className="error">{this.props.error}</p>}
-				<button onClick={this.fetchSmurfs}>See the Smurf Village</button>
-			</div>
-		);
+						)		
+				}
+					)}
+			</ul>
+		)
 	}
+
+
 }
 
 
 const mapStateToProps = state => ({
 	smurfs: state.smurfs,
-  error: state.error
+	fetchingSmurfs: state.fetchingSmurfs,
+	error: state.err
   
 });
 
-export default connect(
-  mapStateToProps,
-  { getSmurfs }
-)(SmurfList);
+export default connect(mapStateToProps)(SmurfList);
 
-
-{/* <form>
-<input type="text" name="newSmurf" value={this.state.newSmurf} onChange={this.handleChange} />
-<input type="text" name="newSmurf" value={this.state.newSmurf} onChange={this.handleChange} />
-	
-	
-	
-
-</form> */}

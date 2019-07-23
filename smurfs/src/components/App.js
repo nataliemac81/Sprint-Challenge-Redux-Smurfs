@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import SmurfList from './SmurfList';
+
 /*
  to wire this component up you're going to need a few things.
  I'll let you do this part on your own. 
@@ -22,12 +23,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    smurfs: [],
-    fetchingSmurfs: false,
-    addingSmurf: false
+      smurfs: state.smurfs
   };
 };
 
-export default connect(mapStateToProps, {})(App);
+
+export default connect(mapStateToProps, {SmurfList})(App);

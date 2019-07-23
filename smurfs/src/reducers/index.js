@@ -3,36 +3,56 @@
 */
 
 import {
-  GET_SMURFS,
+  ADD_SMURF,
+  FETCH_SMURFS,
+  FETCH_SMURFS_BEGIN,
+  FETCH_SMURFS_SUCCESS,
   FETCH_SMURFS_FAILURE,
-  ADD_SMURF
 } from '../actions';
-
-
 
 //  Your initial/default state for this project could *Although does not have to* look a lot like this
  const initialState = {
-   smurfs: null,
-   addingSmurf: false,
+   smurfs: [],
+   fetchingSmurfs: false,
    error: null
  }
 
 export default (state = initialState, action) => {
   switch(action.type) {
+      case FETCH_SMURFS_BEGIN:
+        return {
+          ...state,
+          fetchingSmurfs: true,
+          error: null
+        };
+      case FETCH_SMURFS_SUCCESS:
+        return {
+          ...state,
+          fetchingSmurfs: false,
+          smurfs: action.payload
+        };
       case FETCH_SMURFS_FAILURE:
         return {
           ...state,
-          error: action.payload
-        };
-      case GET_SMURFS:
+          fetchingSmurfs: false,
+          error: action.payload.error,
+          smurfs: []
+        }
+      case FETCH_SMURFS:
+        const { smurfs } = action.payload
         return {
           ...state,
-          smurfs: action.payload
+          fetchingSmurfs: false,
+          error: null,
+          smurfs
         };
       case ADD_SMURF:
         return {
           ...state,
-          smurfs: action.payload
+          id: action.payload.id,
+          name: action.payload.name,
+          age: action.payload.age,
+          height: action.payload.height
         };
       default:
         return state;
@@ -45,4 +65,3 @@ export default (state = initialState, action) => {
   There is no need for 'combineReducers' in this project.
   Components can then read your store as, `state` and not `state.fooReducer`.
 */
- export default reducer
